@@ -1,0 +1,40 @@
+# Node.js dependencies
+node_modules/
+package-lock.json
+
+# Angular build artifacts
+dist/
+.tmp/
+
+# Environment files (to prevent exposing API keys and sensitive data)
+src/environments/environment*.ts
+
+# Compiled TypeScript files
+*.js
+*.js.map
+
+# IDE and editor settings
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.bak
+
+# Logs & Debugging
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Git-related
+.git/
+
+# Optional: Ignore Angular CLI cache
+.angular/

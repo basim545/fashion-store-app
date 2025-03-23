@@ -1,0 +1,72 @@
+<header class="navbar">
+  <div class="brand-container">
+    <img src="/assets/images/fashion-logo.png" alt="Fashion Logo" class="logo" />
+    <div class="site-name">My Fashion Store</div>
+  </div>
+  <div class="search-container">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      (input)="onSearchChange()"
+      placeholder="Search products..."
+    />
+    <ul class="search-suggestions" *ngIf="suggestions.length > 0">
+      <li *ngFor="let suggestion of suggestions" (click)="selectSuggestion(suggestion)">
+        {{ suggestion }}
+      </li>
+    </ul>
+  </div>
+  <div class="filter-btn-container">
+    <button (click)="toggleFilters()" class="filter-btn">Filter</button>
+  </div>
+</header>
+
+<div class="filter-overlay" *ngIf="showFilters">
+  <div class="filter-panel">
+    <div class="filter-panel-header">
+      <h3>Refine Your Search</h3>
+      <button (click)="toggleFilters()" class="close-btn">&times;</button>
+    </div>
+    <div class="filter-group">
+      <h4>Category</h4>
+      <div class="category-options">
+        <div *ngFor="let category of categories" class="category-option">
+          <input
+            type="checkbox"
+            [id]="category"
+            (change)="toggleCategory(category)"
+            [checked]="selectedCategories.includes(category)"
+          />
+          <label [for]="category">{{ category }}</label>
+        </div>
+      </div>
+    </div>
+    <div class="filter-group">
+      <h4>Sort by Price</h4>
+      <div class="sort-options">
+        <button (click)="changeSort('asc')" [class.active]="sortOption === 'asc'">Low to High</button>
+        <button (click)="changeSort('desc')" [class.active]="sortOption === 'desc'">High to Low</button>
+      </div>
+    </div>
+  </div>
+</div> 
+
+<section class="product-grid">
+  <div *ngIf="paginatedProducts.length === 0" class="no-results">
+    No products found.
+  </div>
+  <div *ngFor="let product of paginatedProducts" class="product-card">
+    <img [src]="product.imageUrl" [alt]="product.name" />
+    <div class="product-info">
+      <h3>{{ product.name }}</h3>
+      <p>{{ product.description }}</p>
+      <div class="price">₹{{ product.price }}</div>
+    </div>
+  </div>
+</section>
+
+<div class="pagination-controls">
+  <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Prev</button>
+  <span>Page {{ currentPage }} of {{ totalPages }}</span>
+  <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
+</div>
